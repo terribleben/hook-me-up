@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "hook-me-up",
+    "description": "Determine whether a bar has coat hooks.",
+    "slug": "hook-me-up",
+    "privacy": "unlisted",
+    "sdkVersion": "22.0.0",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4"]
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
