@@ -13,6 +13,9 @@ export default class PickerScreen extends React.Component {
         <GooglePlacesInput
           onSelect={this._onSelectPlace}
           />
+        <Text style={styles.instructions}>
+          Use the search box to look up whichever gloomy bar you're headed for.
+        </Text>
       </View>
     );
   }
@@ -29,5 +32,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: Constants.statusBarHeight,
+  },
+  instructions: {
+    flex: 1,
+    marginHorizontal: 12,
+    fontSize: 16,
   },
 });

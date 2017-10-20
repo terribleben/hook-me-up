@@ -19,7 +19,7 @@ export default class GooglePlacesInput extends React.Component {
   render() {
     return (
       <GooglePlacesAutocomplete
-        placeholder='Search'
+        placeholder='Find a Bar...'
         minLength={3} // minimum length of text to search
         autoFocus={false}
         returnKeyType={'search'}
@@ -39,26 +39,46 @@ export default class GooglePlacesInput extends React.Component {
       
         styles={{
           textInputContainer: {
-            width: '100%'
+            width: '100%',
+            backgroundColor: 'transparent',
+            height: 42,
+            borderTopWidth: 0,
+            borderBottomWidth: 0,
+          },
+          textInput: {
+            borderRadius: 0,
+            fontSize: 24,
+            height: 40,
+            borderBottomWidth: 1,
+            borderBottomColor: '#000',
           },
           description: {
             fontWeight: 'bold'
           },
           predefinedPlacesDescription: {
             color: '#1faadb'
-          }
+          },
+          poweredContainer: {
+            height: 0,
+          },
+          powered: {
+            height: 0,
+          },
+          container: {
+            flex: 1,
+          },
         }}
       
         nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
         GooglePlacesSearchQuery={{
           // available options for GooglePlacesSearch API : https://developers.google.com/places/web-service/search
           rankby: 'distance',
-          types: 'food'
+          types: 'bar'
         }}
 
         predefinedPlaces={[]}
 
-        debounce={200} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+        debounce={200}
         />
     );
   }

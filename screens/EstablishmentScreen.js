@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  ActivityIndicator,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -9,6 +10,7 @@ import {
 import * as Api from '../api/Api';
 import Expo from 'expo';
 const { Constants } = Expo;
+import { Ionicons } from '@expo/vector-icons';
 
 export default class EstablishmentScreen extends React.Component {
   state = {
@@ -31,7 +33,10 @@ export default class EstablishmentScreen extends React.Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View />
+        <View style={[styles.container, { marginTop: 64 }]}>
+          <ActivityIndicator />
+          {this._renderGoBack()}
+        </View>
       );
     }
     const { name } = this._getPlaceProps(this.props);
@@ -47,6 +52,7 @@ export default class EstablishmentScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.question}>Does {name} have coat hooks?</Text>
         {content}
+        {this._renderGoBack()}
       </View>
     );
   }
@@ -75,7 +81,7 @@ export default class EstablishmentScreen extends React.Component {
   _renderUnknownEstablishment = () => {
     return (
       <View>
-        <Text style={styles.answer}>NOBODY KNOWS</Text>
+        <Text style={styles.answer}>it's a mystery</Text>
         <TouchableOpacity
           style={styles.button}
           onPress={() => this._onPressHooksAsync(true)}>
@@ -87,6 +93,17 @@ export default class EstablishmentScreen extends React.Component {
           <Text>I am here and cannot find any damn coat hooks</Text>
         </TouchableOpacity>
       </View>
+    );
+  }
+
+  _renderGoBack = () => {
+    return (
+      <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+        <View style={{ flexDirection: 'row' }}>
+          <Ionicons name="ios-arrow-back" size={30} color="#aaa" style={{ alignSelf: 'flex-start' }} />
+          <Text style={{paddingLeft: 10, paddingTop: 6, color:'#666' }}>Go back</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 
@@ -137,22 +154,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
     marginTop: Constants.statusBarHeight,
   },
   question: {
     fontSize: 24,
-    marginVertical: 16,
+    marginTop: 12,
   },
   answer: {
     fontSize: 48,
-    marginVertical: 8,
+    marginTop: 8,
+    marginBottom: 16,
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: '#ccc',
     padding: 12,
-    marginVertical: 4,
+    marginHorizontal: 8,
+    marginTop: 4,
+    marginBottom: 12,
     alignItems: 'center',
     borderRadius: 6,
+    backgroundColor: '#eee',
   },
 });
