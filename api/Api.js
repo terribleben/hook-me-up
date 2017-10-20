@@ -37,13 +37,24 @@ async function addEstablishmentAsync(data) {
     },
     body: JSON.stringify(data),
   };
-  console.log(`fetch ${url}: ${JSON.stringify(opts)}`);
   const response = await fetch(url, opts);
   return _parseResponse(response);
 }
 
-async function updateEstablishmentAsync(id, data) {
-  
+async function updateEstablishmentAsync(id, hasHooks) {
+  const url = `${ENDPOINT}/bars/${id}`;
+  const data = {
+    has_hooks: hasHooks,
+  };
+  const opts = {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  };
+  const response = await fetch(url, opts);
+  return _parseResponse(response);
 }
 
 export {

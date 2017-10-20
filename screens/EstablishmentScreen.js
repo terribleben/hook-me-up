@@ -52,9 +52,23 @@ export default class EstablishmentScreen extends React.Component {
   }
 
   _renderExistingEstablishment = (establishment) => {
-    let text = (establishment.has_hooks) ? "yep" : "nope";
+    let answer, buttonText;
+    if (establishment.has_hooks) {
+      answer = 'yep';
+      buttonText = 'I disagree, I see no hooks anywhere';
+    } else {
+      answer = 'nope';
+      buttonText = 'Actually I found some';
+    }
     return (
-      <Text style={styles.answer}>{text}</Text>
+      <View>
+        <Text style={styles.answer}>{answer}</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this._onPressHooksAsync(!establishment.has_hooks)}>
+          <Text>{buttonText}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
@@ -78,12 +92,16 @@ export default class EstablishmentScreen extends React.Component {
 
   _onPressHooksAsync = async (hasHooks) => {
     const { name, placeId } = this._getPlaceProps(this.props);
-    console.log('press', name, placeId);
-    await Api.addEstablishmentAsync({
-      name,
-      place_id: placeId,
-      has_hooks: hasHooks,
-    });
+    const { fetchedEstablishment } = this.state;
+    if (fetchedEstablishment) {
+      await Api.updateEstablishmentAsync(fetchedEstablishment.id, hasHooks);
+    } else {
+      await Api.addEstablishmentAsync({
+        name,
+        place_id: placeId,
+        has_hooks: hasHooks,
+      });
+    }
     this._reloadDataAsync();
   }
 
