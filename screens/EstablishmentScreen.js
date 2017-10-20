@@ -45,7 +45,7 @@ export default class EstablishmentScreen extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <Text>Does {name} have coat hooks?</Text>
+        <Text style={styles.question}>Does {name} have coat hooks?</Text>
         {content}
       </View>
     );
@@ -54,24 +54,37 @@ export default class EstablishmentScreen extends React.Component {
   _renderExistingEstablishment = (establishment) => {
     let text = (establishment.has_hooks) ? "yep" : "nope";
     return (
-      <Text>{text}</Text>
+      <Text style={styles.answer}>{text}</Text>
     );
   }
 
   _renderUnknownEstablishment = () => {
     return (
-      <Text>NOBODY KNOWS</Text>
+      <View>
+        <Text style={styles.answer}>NOBODY KNOWS</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this._onPressHooksAsync(true)}>
+          <Text>I am here and it does indeed have coat hooks</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this._onPressHooksAsync(false)}>
+          <Text>I am here and cannot find any damn coat hooks</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 
-  _onPressTest = async () => {
+  _onPressHooksAsync = async (hasHooks) => {
     const { name, placeId } = this._getPlaceProps(this.props);
     console.log('press', name, placeId);
     await Api.addEstablishmentAsync({
       name,
-      placeId,
-      has_hooks: true,
+      place_id: placeId,
+      has_hooks: hasHooks,
     });
+    this._reloadDataAsync();
   }
 
   _getPlaceProps = (props) => {
@@ -108,5 +121,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: Constants.statusBarHeight,
+  },
+  question: {
+    fontSize: 24,
+    marginVertical: 16,
+  },
+  answer: {
+    fontSize: 48,
+    marginVertical: 8,
+  },
+  button: {
+    backgroundColor: '#ccc',
+    padding: 12,
+    marginVertical: 4,
+    alignItems: 'center',
+    borderRadius: 6,
   },
 });
