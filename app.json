@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "hook-me-up",
-    "description": "Determine whether a bar has coat hooks.",
+    "name": "Hook Me Up",
+    "description": "Determine whether a bar has coat hooks. https://github.com/terribleben/hook-me-up",
     "slug": "hook-me-up",
     "privacy": "public",
     "sdkVersion": "22.0.0",
