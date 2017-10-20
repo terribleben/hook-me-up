@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   },
   question: {
     fontSize: 24,
-    marginTop: 12,
+    marginTop: 16,
   },
   answer: {
     fontSize: 48,
