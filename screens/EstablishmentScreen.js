@@ -33,7 +33,7 @@ export default class EstablishmentScreen extends React.Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={[styles.container, { marginTop: 64 }]}>
+        <View style={[styles.container, { paddingTop: 64 }]}>
           <ActivityIndicator />
           {this._renderGoBack()}
         </View>
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     marginTop: Constants.statusBarHeight,
+    paddingHorizontal: 12,
   },
   question: {
     fontSize: 24,
@@ -168,7 +169,6 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 12,
-    marginHorizontal: 8,
     marginTop: 4,
     marginBottom: 12,
     alignItems: 'center',
