@@ -1,13 +1,15 @@
 {
   "expo": {
     "name": "Hook Me Up",
-    "description": "Determine whether a bar has coat hooks. https://github.com/terribleben/hook-me-up",
+    "description": "Determine whether a bar has coat hooks.",
     "slug": "hook-me-up",
     "privacy": "public",
-    "sdkVersion": "22.0.0",
+    "sdkVersion": "26.0.0",
     "version": "1.0.1",
     "orientation": "portrait",
     "primaryColor": "#aa712a",
+    "platforms": ["android", "ios"],
+    "githubUrl": "https://github.com/terribleben/hook-me-up",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
