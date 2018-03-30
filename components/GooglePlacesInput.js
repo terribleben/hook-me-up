@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import Keys from '../Keys';
 
@@ -15,17 +15,46 @@ export default class GooglePlacesInput extends React.Component {
       }, data, details);
     }
   }
+
+  _renderRow = (row) => {
+    let name, description;
+    if (row.structured_formatting) {
+      let { main_text, secondary_text } = row.structured_formatting;
+      name = main_text;
+      description = secondary_text;
+    } else {
+      name = row.description;
+    }
+    return (
+      <View>
+        <Text style={{ fontWeight: 'bold', fontSize: 14 }}>
+          {name}
+        </Text>
+        <Text style={{ fontSize: 11, color: '#333', marginTop: 4 }}>
+          {description}
+        </Text>
+      </View>
+    );
+  }
+
+  _renderDescription = (row) => {
+    if (row.structured_formatting) {
+      return row.structured_formatting.main_text;
+    }
+    return row.description;
+  }
   
   render() {
     return (
       <GooglePlacesAutocomplete
-        placeholder='Find a Bar...'
+        placeholder='Find a bar...'
         minLength={3} // minimum length of text to search
         autoFocus={false}
         returnKeyType={'search'}
         listViewDisplayed='auto'
         fetchDetails={true}
-        renderDescription={row => row.description} // custom description render
+        renderRow={this._renderRow}
+        renderDescription={this._renderDescription} // used as selected text in TextInput
         onPress={this._onPress}
       
         getDefaultValue={() => ''}
@@ -39,21 +68,21 @@ export default class GooglePlacesInput extends React.Component {
       
         styles={{
           textInputContainer: {
-            width: '100%',
-            backgroundColor: 'transparent',
+            backgroundColor: '#e9e9e9',
             height: 42,
             borderTopWidth: 0,
             borderBottomWidth: 0,
+            marginHorizontal: 8,
+            marginTop: 4,
+            borderRadius: 3,
           },
           textInput: {
             borderRadius: 0,
-            fontSize: 24,
-            height: 40,
-            borderBottomWidth: 1,
-            borderBottomColor: '#000',
+            fontSize: 18,
+            backgroundColor: 'transparent',
           },
-          description: {
-            fontWeight: 'bold'
+          listView: {
+            marginTop: 12,
           },
           predefinedPlacesDescription: {
             color: '#1faadb'
@@ -63,6 +92,10 @@ export default class GooglePlacesInput extends React.Component {
           },
           powered: {
             height: 0,
+          },
+          row: {
+            backgroundColor: '#fff',
+            height: 58,
           },
           container: {
             flex: 1,

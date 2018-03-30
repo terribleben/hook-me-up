@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, StatusBar, Text, View } from 'react-native';
 
 import Expo from 'expo';
 import GooglePlacesInput from '../components/GooglePlacesInput';
@@ -10,12 +10,17 @@ export default class PickerScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <GooglePlacesInput
-          onSelect={this._onSelectPlace}
-          />
-        <Text style={styles.instructions}>
-          Use the search box to look up whichever gloomy bar you're headed for.
-        </Text>
+        <StatusBar style="dark-content" />
+        <View style={styles.content}>
+          <Text style={styles.instructions}>
+            Are you going to be able to put your coat anywhere tonight? Use the search box to find out.
+          </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <GooglePlacesInput
+            onSelect={this._onSelectPlace}
+            />
+        </View>
       </View>
     );
   }
@@ -27,15 +32,27 @@ export default class PickerScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+inputContainer: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'transparent',
     marginTop: Constants.statusBarHeight,
   },
+  content: {
+    marginTop: 64 + Constants.statusBarHeight,
+    paddingHorizontal: 12,
+  },
   instructions: {
-    flex: 1,
-    marginHorizontal: 12,
     fontSize: 16,
   },
 });
