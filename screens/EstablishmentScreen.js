@@ -33,12 +33,7 @@ export default class EstablishmentScreen extends React.Component {
   
   render() {
     if (this.state.isLoading) {
-      return (
-        <View style={[styles.container, { paddingTop: 64 }]}>
-          <ActivityIndicator />
-          {this._renderGoBack()}
-        </View>
-      );
+      return this._renderLoading();
     }
     const { name } = this._getPlaceProps(this.props);
     const { fetchedEstablishment } = this.state;
@@ -58,6 +53,17 @@ export default class EstablishmentScreen extends React.Component {
       </ScrollView>
     );
   }
+
+  _renderLoading = () => {
+    return (
+      <View style={styles.container}>
+        <View style={styles.loadingPlaceholder}>
+          <ActivityIndicator />
+        </View>
+        {this._renderGoBack()}
+      </View>
+    );
+  };
 
   _renderExistingEstablishment = (establishment) => {
     let answer, answerStyle, buttonText;
@@ -167,6 +173,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: 12,
     paddingTop: Constants.statusBarHeight + 8,
+  },
+  loadingPlaceholder: {
+    marginVertical: 8,
+    paddingVertical: 72,
+    borderRadius: 6,
+    backgroundColor: '#f0f0f0',
   },
   name: {
     fontSize: 18,
