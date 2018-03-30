@@ -39,17 +39,17 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#fff',
   },
-inputContainer: {
+  inputContainer: {
     position: 'absolute',
     left: 0,
     top: 0,
     right: 0,
     bottom: 0,
     backgroundColor: 'transparent',
-    marginTop: Constants.statusBarHeight,
+    marginTop: Constants.statusBarHeight + 8,
   },
   content: {
-    marginTop: 64 + Constants.statusBarHeight,
+    marginTop: 72 + Constants.statusBarHeight,
     paddingHorizontal: 12,
   },
   instructions: {

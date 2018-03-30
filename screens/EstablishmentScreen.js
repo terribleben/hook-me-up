@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -49,26 +50,31 @@ export default class EstablishmentScreen extends React.Component {
       content = this._renderUnknownEstablishment();
     }
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.name}>{name}</Text>
         <Text style={styles.question}>Does {name} have coat hooks?</Text>
         {content}
         {this._renderGoBack()}
-      </View>
+      </ScrollView>
     );
   }
 
   _renderExistingEstablishment = (establishment) => {
-    let answer, buttonText;
+    let answer, answerStyle, buttonText;
     if (establishment.has_hooks) {
       answer = 'yep';
+      answerStyle = styles.answerYesContainer;
       buttonText = 'I disagree, I see no hooks anywhere';
     } else {
       answer = 'nope';
+      answerStyle = styles.answerNoContainer;
       buttonText = 'Actually I found some';
     }
     return (
       <View>
-        <Text style={styles.answer}>{answer}</Text>
+        <View style={[styles.answerContainer, answerStyle]}>
+          <Text style={styles.answerText}>{answer}</Text>
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => this._onPressHooksAsync(!establishment.has_hooks)}>
@@ -81,7 +87,9 @@ export default class EstablishmentScreen extends React.Component {
   _renderUnknownEstablishment = () => {
     return (
       <View>
-        <Text style={styles.answer}>it's a mystery</Text>
+        <View style={[styles.answerContainer, styles.answerUnknownContainer]}>
+          <Text style={styles.answerText}>it's a mystery</Text>
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => this._onPressHooksAsync(true)}>
@@ -151,21 +159,41 @@ export default class EstablishmentScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    marginTop: Constants.statusBarHeight,
     paddingHorizontal: 12,
+    paddingTop: Constants.statusBarHeight + 8,
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 8,
+    marginBottom: 12,
   },
   question: {
-    fontSize: 24,
-    marginTop: 16,
+    fontSize: 14,
   },
-  answer: {
+  answerContainer: {
+    marginVertical: 8,
+    paddingVertical: 48,
+    borderRadius: 6,
+  },
+  answerText: {
     fontSize: 48,
-    marginTop: 8,
-    marginBottom: 16,
     textAlign: 'center',
+  },
+  answerYesContainer: {
+    backgroundColor: '#0f0',
+  },
+  answerNoContainer: {
+    backgroundColor: '#f00',
+  },
+  answerUnknownContainer: {
+    backgroundColor: '#ddf',
   },
   button: {
     padding: 12,
