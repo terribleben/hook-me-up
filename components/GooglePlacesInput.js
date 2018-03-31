@@ -56,6 +56,7 @@ export default class GooglePlacesInput extends React.Component {
         renderRow={this._renderRow}
         renderDescription={this._renderDescription} // used as selected text in TextInput
         onPress={this._onPress}
+        placeholderTextColor="#ffffff"
       
         getDefaultValue={() => ''}
       
@@ -68,7 +69,7 @@ export default class GooglePlacesInput extends React.Component {
       
         styles={{
           textInputContainer: {
-            backgroundColor: '#e9e9e9',
+            backgroundColor: 'rgba(64, 64, 64, 0.3)',
             height: 42,
             borderTopWidth: 0,
             borderBottomWidth: 0,
@@ -82,19 +83,21 @@ export default class GooglePlacesInput extends React.Component {
             backgroundColor: 'transparent',
           },
           listView: {
-            marginTop: 12,
+            marginTop: 14,
           },
           predefinedPlacesDescription: {
             color: '#1faadb'
           },
           poweredContainer: {
             height: 0,
+            backgroundColor: 'transparent',
           },
           powered: {
             height: 0,
+            backgroundColor: 'transparent',
           },
           row: {
-            backgroundColor: '#fff',
+            backgroundColor: 'transparent',
             height: 58,
           },
           container: {

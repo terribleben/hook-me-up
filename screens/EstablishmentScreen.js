@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  PixelRatio,
   View,
 } from 'react-native';
 
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     top: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     paddingHorizontal: 12,
     paddingTop: Constants.statusBarHeight + 8,
   },
@@ -193,19 +194,22 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     paddingVertical: 48,
     borderRadius: 6,
+    borderWidth: 1,
+    borderColor: '#4b5d6c',
   },
   answerText: {
     fontSize: 48,
     textAlign: 'center',
   },
   answerYesContainer: {
-    backgroundColor: '#0f0',
+    backgroundColor: '#39b854',
   },
   answerNoContainer: {
-    backgroundColor: '#f00',
+    backgroundColor: '#ea7c94',
+
   },
   answerUnknownContainer: {
-    backgroundColor: '#ddf',
+    backgroundColor: '#dff1f4',
   },
   button: {
     padding: 12,
@@ -213,6 +217,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     alignItems: 'center',
     borderRadius: 6,
-    backgroundColor: '#eee',
+    backgroundColor: '#f8f8f8',
+    borderWidth: 1.0 / PixelRatio.get(),
   },
 });
